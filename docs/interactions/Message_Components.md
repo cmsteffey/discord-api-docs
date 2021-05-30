@@ -24,15 +24,16 @@ The top-level `components` field is an array of `ActionRow` components.
 
 ## Component Object
 
-| Field      | Type                                                | Description                                                                         | Valid For                                                |
-| ---------- | --------------------------------------------------- | ----------------------------------------------------------------------------------- | -------------------------------------------------------- |
-| type       | int                                                 | [component type](#DOCS_INTERACTIONS_MESSAGE_COMPONENTS/component-types)             | all types                                                |
-| style?     | int                                                 | one of [button styles](#DOCS_INTERACTIONS_MESSAGE_COMPONENTS/buttons-button-styles) | [Buttons](#DOCS_INTERACTIONS_MESSAGE_COMPONENTS/buttons) |
-| label?     | string                                              | text the appears on the button, max 80 characters                                   | [Buttons](#DOCS_INTERACTIONS_MESSAGE_COMPONENTS/buttons) |
-| emoji?     | partial [emoji](#DOCS_RESOURCES_EMOJI/emoji-object) | `name`, `id`, and `animated`                                                        | [Buttons](#DOCS_INTERACTIONS_MESSAGE_COMPONENTS/buttons) |
-| custom_id? | string                                              | a developer-defined identifier for the button, max 100 characters                   | [Buttons](#DOCS_INTERACTIONS_MESSAGE_COMPONENTS/buttons) |
-| url?       | string                                              | a url for link-style buttons                                                        | [Buttons](#DOCS_INTERACTIONS_MESSAGE_COMPONENTS/buttons) |
-| disabled?  | bool                                                | whether the button is disabled, default `false`                                     | [Buttons](#DOCS_INTERACTIONS_MESSAGE_COMPONENTS/buttons) |
+| Field       | Type                                                                                  | Description                                                                         | Valid For                                                      |
+| ----------- | ------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | -------------------------------------------------------------- |
+| type        | int                                                                                   | [component type](#DOCS_INTERACTIONS_MESSAGE_COMPONENTS/component-types)             | all types                                                      |
+| style?      | int                                                                                   | one of [button styles](#DOCS_INTERACTIONS_MESSAGE_COMPONENTS/buttons-button-styles) | [Buttons](#DOCS_INTERACTIONS_MESSAGE_COMPONENTS/buttons)       |
+| label?      | string                                                                                | text that appears on the button, max 80 characters                                  | [Buttons](#DOCS_INTERACTIONS_MESSAGE_COMPONENTS/buttons)       |
+| emoji?      | partial [emoji](#DOCS_RESOURCES_EMOJI/emoji-object)                                   | `name`, `id`, and `animated`                                                        | [Buttons](#DOCS_INTERACTIONS_MESSAGE_COMPONENTS/buttons)       |
+| custom_id?  | string                                                                                | a developer-defined identifier for the button, max 100 characters                   | [Buttons](#DOCS_INTERACTIONS_MESSAGE_COMPONENTS/buttons)       |
+| url?        | string                                                                                | a url for link-style buttons                                                        | [Buttons](#DOCS_INTERACTIONS_MESSAGE_COMPONENTS/buttons)       |
+| disabled?   | bool                                                                                  | whether the button is disabled, default `false`                                     | [Buttons](#DOCS_INTERACTIONS_MESSAGE_COMPONENTS/buttons)       |
+| components? | Array of [message components](#DOCS_INTERACTIONS_MESSAGE_COMPONENTS/component-object) | a list of child components                                                          | [Action Rows](#DOCS_INTERACTIONS_MESSAGE_COMPONENTS/actionrow) |
 
 ## Component Types
 
@@ -73,6 +74,9 @@ An `ActionRow` is a non-interactive container component for other types of compo
 
 Responding to a user interacting with a component is the same as other interaction types, like slash commands. You can simply ACK the request, send a followup message, or edit the original message to something new. Check out [Responding to An Interaction](#DOCS_INTERACTIONS_SLASH_COMMANDS/responding-to-an-interaction) and [interaction response](#DOCS_INTERACTIONS_SLASH_COMMANDS/interaction-response) for more.
 
+> danger
+> Your application should take care to validate data sent in message component interactions. For example, ensuring that the `custom_id` originates from the received message. In the future this information will be validated by the API.
+
 ## Custom Id
 
 Message components, aside from `ActionRows`, have a mandatory `custom_id` field. This field is defined by the developer when sending the component payload, and is returned in the interaction payload sent when a user interacts with the component. For example, if you set `custom_id: click_me` on a button, you'll receive an interaction containing `custom_id: click_me` when a user clicks that button.
@@ -92,7 +96,7 @@ Buttons are interactive components that render on messages. They can be clicked 
 | ---------- | --------------------------------------------------- | ----------------------------------------------------------------------------------- |
 | type       | int                                                 | `2` for a button                                                                    |
 | style      | int                                                 | one of [button styles](#DOCS_INTERACTIONS_MESSAGE_COMPONENTS/buttons-button-styles) |
-| label?     | string                                              | text the appears on the button, max 80 characters                                   |
+| label?     | string                                              | text that appears on the button, max 80 characters                                   |
 | emoji?     | partial [emoji](#DOCS_RESOURCES_EMOJI/emoji-object) | `name`, `id`, and `animated`                                                        |
 | custom_id? | string                                              | a developer-defined identifier for the button, max 100 characters                   |
 | url?       | string                                              | a url for link-style buttons                                                        |
